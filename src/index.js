@@ -44,9 +44,11 @@ const drawLoginForm = () => {
     });
 
     localStorage.setItem('token',res.data.token);
+    drawTodoList();
   });
 
   // 3. 문서 내부에 삽입하기
+  rootEl.textContent = '';
   rootEl.appendChild(fragment);
 }
 
@@ -69,6 +71,7 @@ const drawTodoList = async () => {
     bodyEl.textContent = todoItem.body;
 
     // 3. 문서 내부에 삽입하기
+    rootEl.textContent = '';
     todoListEl.appendChild(fragment);
   });
 
@@ -77,4 +80,4 @@ const drawTodoList = async () => {
 }
 
 drawLoginForm();
-drawTodoList();
+// drawTodoList();
