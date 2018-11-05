@@ -84,6 +84,12 @@ const drawTodoList = async () => {
 
     // 2. 내용 채우고, 이벤트 리스너 등록하기
     const bodyEl = fragment.querySelector('.body');
+    const deleteButtonEl = fragment.querySelector('.delete-button');
+
+    deleteButtonEl.addEventListener('click', async (e) => {
+      const res = await api.delete('todos/' + todoItem.id);
+      drawTodoList();
+    });
     bodyEl.textContent = todoItem.body;
 
     // 3. 문서 내부에 삽입하기

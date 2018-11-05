@@ -28,5 +28,13 @@ h1{
   list-style: none;
   font-size: 1.3rem;
   margin-bottom:10px;
-
+}
+.todo-item{
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+}
+.delete-button{
+  width:70px;
+  height: 25px;
 }
