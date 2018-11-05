@@ -87,7 +87,7 @@ const drawTodoList = async () => {
     const deleteButtonEl = fragment.querySelector('.delete-button');
 
     deleteButtonEl.addEventListener('click', async (e) => {
-      const res = await api.delete('todos/' + todoItem.id);
+      await api.delete('todos/' + todoItem.id);
       drawTodoList();
     });
     bodyEl.textContent = todoItem.body;
