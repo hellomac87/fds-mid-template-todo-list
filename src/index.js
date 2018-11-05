@@ -101,5 +101,10 @@ const drawTodoList = async () => {
   rootEl.appendChild(fragment);
 }
 
-drawLoginForm();
+if (localStorage.getItem('token')) {
+  drawTodoList();
+}else{
+  drawLoginForm();
+}
+
 // drawTodoList();
