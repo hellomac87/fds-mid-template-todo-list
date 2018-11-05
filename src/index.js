@@ -5,8 +5,22 @@ const api = axios.create({
   baseURL: "https://grave-staircase.glitch.me",
 });
 
+// Axios Interceptor - 그때그때 다른 설정 사용하기
+// axios에는 매번 요청이 일어나기 직전에 **설정 객체를 가로채서** 원하는대로 편집할 수 있는 기능이 있습니다.
+api.interceptors.request.use(function (config) {
+  // localStorage에 token이 있으면 요청에 헤더 설정, 없으면 아무것도 하지 않음
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers = config.headers || {}
+    config.headers['Authorization'] = 'Bearer ' + token
+  }
+  return config;
+});
+
 const templates = {
   loginForm : document.querySelector('#loginForm').content,
+  todoList: document.querySelector('#todoList').content,
+  todoItem: document.querySelector('#todoItem').content,
 }
 
 const rootEl = document.querySelector('.root');
@@ -29,7 +43,33 @@ const drawLoginForm = () => {
       password
     });
 
-    console.log(res.data.token);
+    localStorage.setItem('token',res.data.token);
+  });
+
+  // 3. 문서 내부에 삽입하기
+  rootEl.appendChild(fragment);
+}
+
+const drawTodoList = async () => {
+
+  const res = await api.get('todos');
+  const list = res.data;
+
+  // 1. template 복사하기
+  const fragment = document.importNode(templates.todoList, true);
+
+  // 2. 내용 채우고, 이벤트 리스너 등록하기
+  const todoListEl = fragment.querySelector('.todo-list');
+  list.forEach((todoItem) => {
+    // 1. template 복사하기
+    const fragment = document.importNode(templates.todoItem, true);
+
+    // 2. 내용 채우고, 이벤트 리스너 등록하기
+    const bodyEl = fragment.querySelector('.body');
+    bodyEl.textContent = todoItem.body;
+
+    // 3. 문서 내부에 삽입하기
+    todoListEl.appendChild(fragment);
   });
 
   // 3. 문서 내부에 삽입하기
@@ -37,3 +77,4 @@ const drawLoginForm = () => {
 }
 
 drawLoginForm();
+drawTodoList();
