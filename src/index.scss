@@ -1,5 +1,17 @@
-$main-color: skyblue;
+$main-color: #23292d;
 
+*{
+  margin: 0;
+  padding: 0;
+}
+html{
+  font-size:10px;
+}
 body {
+  color:#fff;
   background-color: $main-color;
+}
+.root{
+  width:500px;
+  margin: 100px auto;
 }
