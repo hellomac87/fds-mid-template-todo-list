@@ -20,6 +20,12 @@ input, button{
   width:100%;
   height: 25px;
   margin-bottom:5px;
+  &[type=checkbox]{
+    width:auto;
+    &:checked + .body{
+      text-decoration: line-through;
+    }
+  }
 }
 h1{
     margin-bottom: 20px;

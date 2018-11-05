@@ -85,11 +85,29 @@ const drawTodoList = async () => {
     // 2. 내용 채우고, 이벤트 리스너 등록하기
     const bodyEl = fragment.querySelector('.body');
     const deleteButtonEl = fragment.querySelector('.delete-button');
+    const checkBoixEl = fragment.querySelector('.check-box');
 
+    if(todoItem.complete === true){
+      checkBoixEl.setAttribute('checked', true);
+    }else{
+      checkBoixEl.removeAttribute('checked');
+    }
+
+    // 삭제 버튼 이벤트 리스너
     deleteButtonEl.addEventListener('click', async (e) => {
       await api.delete('todos/' + todoItem.id);
       drawTodoList();
     });
+
+    // 체크박스 이벤트 리스너
+    checkBoixEl.addEventListener('click', async (e) => {
+      e.preventDefault()
+      await api.patch('todos/' + todoItem.id, {
+        complete: !todoItem.complete
+      });
+      drawTodoList();
+    });
+
     bodyEl.textContent = todoItem.body;
 
     // 3. 문서 내부에 삽입하기
