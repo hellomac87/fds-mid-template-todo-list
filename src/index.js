@@ -1,5 +1,9 @@
 import "@babel/polyfill"; // 이 라인을 지우지 말아주세요!
+import axios from "axios";
 
+const api = axios.create({
+  baseURL: "https://grave-staircase.glitch.me",
+});
 
 const templates = {
   loginForm : document.querySelector('#loginForm').content,
@@ -16,7 +20,16 @@ const drawLoginForm = () => {
 
   loginFormEl.addEventListener('submit', async (e) => {
     e.preventDefault();
-    alert('login 요청 전송');
+
+    const username = e.target.elements.username.value;
+    const password = e.target.elements.password.value;
+
+    const res = await api.post('users/login',{
+      username,
+      password
+    });
+
+    console.log(res.data.token);
   });
 
   // 3. 문서 내부에 삽입하기
