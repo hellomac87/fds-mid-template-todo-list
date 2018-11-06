@@ -102,9 +102,12 @@ const drawTodoList = async () => {
     // 체크박스 이벤트 리스너
     checkBoixEl.addEventListener('click', async (e) => {
       e.preventDefault()
+      // 삭제 요청 보내기
       await api.patch('todos/' + todoItem.id, {
         complete: !todoItem.complete
       });
+
+      // 삭제 요청 성공시 할일 목록 다식 그리기
       drawTodoList();
     });
 
