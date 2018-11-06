@@ -75,6 +75,7 @@ const drawTodoList = async () => {
   });
 
   todoFormEl.addEventListener('submit', async (e) => {
+    document.body.classList.add('loading');
     e.preventDefault();
     const body = e.target.elements.body.value;
 
@@ -84,8 +85,10 @@ const drawTodoList = async () => {
     });
 
     if(res.status === 201){
-      drawTodoList();
+      await drawTodoList();
+      document.body.classList.remove('loading');
     }
+
   });
 
   list.forEach((todoItem) => {
