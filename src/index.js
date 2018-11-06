@@ -85,7 +85,8 @@ const drawTodoList = async () => {
     });
 
     if(res.status === 201){
-      await drawTodoList();
+      await drawTodoList(); // 비동기함수는 promise를 반환한다. 여기서는 undefined 를 반환
+      // await 미작성시 drawTodoList 가 시행되는 도중에 loading indicator 사라짐
       document.body.classList.remove('loading');
     }
 
