@@ -1,6 +1,7 @@
 # Parcel
 .cache/
 dist/
+.vscode
 
 # Logs
 logs
