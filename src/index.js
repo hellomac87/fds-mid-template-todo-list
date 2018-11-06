@@ -97,9 +97,8 @@ const drawTodoList = async () => {
     const deleteButtonEl = fragment.querySelector('.delete-button');
     const checkboxEl = fragment.querySelector('.check-box');
 
-
-    if(todoItem.complete === true){
-      checkboxEl.setAttribute('checked', true);
+    if(todoItem.complete){
+      checkboxEl.setAttribute('checked', '');
     }else{
       checkboxEl.removeAttribute('checked');
     }
