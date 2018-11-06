@@ -63,6 +63,16 @@ const drawTodoList = async () => {
   // 2. 내용 채우고, 이벤트 리스너 등록하기
   const todoListEl = fragment.querySelector('.todo-list');
   const todoFormEl = fragment.querySelector('.todo-form');
+  const logoutEl = fragment.querySelector('.logout');
+
+  // 로그아웃 버튼 이벤트 리스너
+  logoutEl.addEventListener('click', (e) => {
+    // 로그아웃 절차
+    // 1. 토큰 삭제
+    localStorage.removeItem('token');
+    // 2. 로그인 폼 그려주기
+    drawLoginForm();
+  });
 
   todoFormEl.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -85,12 +95,13 @@ const drawTodoList = async () => {
     // 2. 내용 채우고, 이벤트 리스너 등록하기
     const bodyEl = fragment.querySelector('.body');
     const deleteButtonEl = fragment.querySelector('.delete-button');
-    const checkBoixEl = fragment.querySelector('.check-box');
+    const checkboxEl = fragment.querySelector('.check-box');
+
 
     if(todoItem.complete === true){
-      checkBoixEl.setAttribute('checked', true);
+      checkboxEl.setAttribute('checked', true);
     }else{
-      checkBoixEl.removeAttribute('checked');
+      checkboxEl.removeAttribute('checked');
     }
 
     // 삭제 버튼 이벤트 리스너
@@ -100,7 +111,7 @@ const drawTodoList = async () => {
     });
 
     // 체크박스 이벤트 리스너
-    checkBoixEl.addEventListener('click', async (e) => {
+    checkboxEl.addEventListener('click', async (e) => {
       e.preventDefault()
       // 삭제 요청 보내기
       await api.patch('todos/' + todoItem.id, {
