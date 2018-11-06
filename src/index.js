@@ -111,7 +111,8 @@ const drawTodoList = async () => {
 
     // 체크박스 이벤트 리스너
     checkboxEl.addEventListener('click', async (e) => {
-      e.preventDefault()
+      // 주석을 풀면 비관적 업데이트 방식으로 변함
+      // e.preventDefault()
       // 삭제 요청 보내기
       await api.patch('todos/' + todoItem.id, {
         complete: !todoItem.complete
