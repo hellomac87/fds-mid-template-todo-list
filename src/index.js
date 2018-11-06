@@ -122,9 +122,12 @@ const drawTodoList = async () => {
   rootEl.appendChild(fragment);
 }
 
+
 if (localStorage.getItem('token')) {
+  // 로그인을 한 상태(토큰이 존재하는상태) 면 할일 목록을 바로 보여주고
   drawTodoList();
 }else{
+  // 아니라면 로그인 폼을 보여준다
   drawLoginForm();
 }
 
